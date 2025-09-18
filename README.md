@@ -14,7 +14,7 @@
 [![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 <!-- Version and Dependencies -->
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Poetry](https://img.shields.io/badge/dependency%20manager-poetry-blue.svg)](https://python-poetry.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -30,39 +30,67 @@ A comprehensive Python CI/CD demonstration project showcasing modern software en
 
 This repository serves as a hands-on guide for beginners to learn professional software development workflows. It demonstrates:
 
-- **Modern Python Development**: Poetry for dependency management, src layout, type hints
+- **Modern Python Development**: Poetry for dependency management, src layout, type hints (Python 3.11+)
 - **Automated Quality Assurance**: Pre-commit hooks, linting, security scanning, comprehensive testing
 - **CI/CD Pipeline**: GitHub Actions workflows for testing, security, releases, and documentation
 - **Documentation**: Sphinx-generated docs with automatic deployment to GitHub Pages
 - **Containerization**: Docker best practices with multi-stage builds and security hardening
 
+> **Note**: This project requires Python 3.11 or higher to take advantage of the latest features and security improvements in the Python ecosystem.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Python 3.8 or higher
-- [Poetry](https://python-poetry.org/docs/#installation)
+- Python 3.11 or higher
+- [Poetry](https://python-poetry.org/docs/#installation) (recommended)
 - Git
 
-### Installation
+### Quick Setup with Scripts
+
+The easiest way to get started is using our automated setup scripts:
+
+```bash
+# Cross-platform Python script (recommended)
+python scripts/setup_venv.py --dev --all
+
+# Windows PowerShell
+.\scripts\setup_venv.ps1 -Dev -All
+
+# Windows Command Prompt
+scripts\setup_venv.bat --dev --all
+```
+
+These scripts will:
+
+- Automatically detect Python 3.11+ installations on your system
+- Create a virtual environment with the appropriate Python version
+- Install all dependencies including development tools
+- Provide activation instructions for your platform
+
+### Manual Installation
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/username/python-cicd-demo.git
    cd python-cicd-demo
    ```
 
 2. **Install dependencies**:
+
    ```bash
    make install
    ```
 
 3. **Run the application**:
+
    ```bash
    poetry run python -m python_cicd_demo.main
    ```
 
 4. **Run tests**:
+
    ```bash
    make test
    ```
@@ -107,9 +135,68 @@ This project uses pre-commit hooks to ensure code quality:
 - **General Quality**: Trailing whitespace, YAML validation, large file checks
 
 Install hooks after cloning:
+
 ```bash
 poetry run pre-commit install
 ```
+
+## 🛠 Setup Scripts
+
+The `scripts/` directory contains automated setup utilities to streamline development environment creation:
+
+### Virtual Environment Setup
+
+Our intelligent setup scripts automatically:
+
+- **Scan your system** for Python 3.11+ installations
+- **Let you choose** which Python version to use
+- **Create a virtual environment** with optimal settings
+- **Install dependencies** from pyproject.toml
+- **Provide activation instructions** for your platform
+
+### Usage Examples
+
+```bash
+# Basic development setup (recommended)
+python scripts/setup_venv.py --dev --all
+
+# Create custom-named environment with all dependencies
+python scripts/setup_venv.py --venv-name myproject --all
+
+# Force recreate existing environment
+python scripts/setup_venv.py --force --dev
+
+# Use specific Python installation
+python scripts/setup_venv.py --python /usr/bin/python3.11 --dev
+```
+
+### Platform-Specific Scripts
+
+**Windows PowerShell:**
+
+```powershell
+.\scripts\setup_venv.ps1 -Dev -All
+```
+
+**Windows Command Prompt:**
+
+```cmd
+scripts\setup_venv.bat --dev --all
+```
+
+**Cross-Platform Python:**
+
+```bash
+python scripts/setup_venv.py --dev --all
+```
+
+### Script Features
+
+- **Intelligent Python Discovery**: Finds installations from common locations (system, pyenv, conda, etc.)
+- **Cross-Platform Support**: Works on Windows, macOS, and Linux
+- **Error Handling**: Clear error messages and troubleshooting suggestions
+- **Dependency Management**: Supports pyproject.toml and requirements.txt files
+- **Optional Dependencies**: Install development, test, or all optional dependencies
 
 ## 🔧 CI/CD Pipeline
 
@@ -118,7 +205,7 @@ poetry run pre-commit install
 1. **CI Pipeline** (`.github/workflows/ci.yml`):
    - Runs on every push and pull request
    - Linting and security scanning
-   - Multi-version Python testing (3.8, 3.9, 3.10, 3.11)
+   - Multi-version Python testing (3.11, 3.12)
    - Code coverage reporting
 
 2. **Security Analysis** (`.github/workflows/security.yml`):
@@ -152,6 +239,7 @@ The project implements a comprehensive testing approach:
 - **Property-Based Testing**: Using Hypothesis for edge case discovery
 
 Run specific test types:
+
 ```bash
 poetry run pytest tests/unit/           # Unit tests only
 poetry run pytest tests/integration/    # Integration tests only
@@ -176,6 +264,7 @@ Documentation is automatically built and deployed to GitHub Pages:
 - **Best Practices**: Explanations of CI/CD patterns and decisions
 
 View documentation locally:
+
 ```bash
 make docs
 make docs-serve  # Serve on http://localhost:8000
@@ -191,6 +280,7 @@ docker run -p 8000:8000 python-cicd-demo
 ```
 
 The Docker image follows security best practices:
+
 - Non-root user
 - Minimal attack surface
 - Health checks
@@ -232,6 +322,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [GitHub Actions](https://github.com/features/actions) for CI/CD
 - [Sphinx](https://www.sphinx-doc.org/) for documentation
 - [pytest](https://pytest.org/) for testing framework
+- [pre-commit](https://pre-commit.com/) for quality assurance automation
 - The Python community for excellent tooling and best practices
 
 ## 📞 Support

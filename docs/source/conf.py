@@ -14,6 +14,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.intersphinx",
     "myst_parser",
+    "sphinxcontrib.mermaid",
 ]
 
 templates_path: List[str] = ["_templates"]

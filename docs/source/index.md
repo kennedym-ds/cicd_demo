@@ -46,7 +46,9 @@ api
 ## Project Highlights
 
 ### 🎯 Educational Focus
+
 This project serves as a hands-on learning resource that demonstrates:
+
 - **Modern Python Development**: Best practices for structuring and developing Python applications
 - **Comprehensive Testing**: Unit, integration, and security testing strategies
 - **CI/CD Automation**: GitHub Actions workflows for continuous integration and deployment
@@ -54,6 +56,7 @@ This project serves as a hands-on learning resource that demonstrates:
 - **Documentation**: Comprehensive documentation with Sphinx and MyST
 
 ### 🛠️ Technology Stack
+
 - **Python 3.8+**: Modern Python with type hints and async support
 - **Poetry**: Dependency management and virtual environment handling
 - **pytest**: Comprehensive testing framework with coverage analysis
@@ -62,6 +65,7 @@ This project serves as a hands-on learning resource that demonstrates:
 - **Docker**: Containerization with security best practices
 
 ### 📊 Quality Metrics
+
 - **Test Coverage**: 80%+ line coverage requirement
 - **Security**: Zero high-severity vulnerabilities
 - **Code Style**: 100% Black compliant formatting
@@ -87,6 +91,6 @@ poetry run bandit -r src/
 
 ## Indices and tables
 
-* {ref}`genindex`
-* {ref}`modindex`
-* {ref}`search`
+- {ref}`genindex`
+- {ref}`modindex`
+- {ref}`search`

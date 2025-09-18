@@ -22,7 +22,6 @@ Options:
 """
 
 import argparse
-import json
 import os
 import platform
 import shutil
@@ -320,11 +319,13 @@ class VenvSetup:
         """Check if a path is a valid Python executable and get its info."""
         try:
             # Run python --version to get version info
-            result = subprocess.run(
-                [str(python_path), "--version"],
-                capture_output=True,
-                text=True,
-                timeout=5,
+            result = (
+                subprocess.run(  # nosec B603  # Safe: controlled python executable path
+                    [str(python_path), "--version"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5,
+                )
             )
 
             if result.returncode == 0:
@@ -333,7 +334,7 @@ class VenvSetup:
                 version = version_output.replace("Python ", "").strip()
 
                 # Get architecture info
-                arch_result = subprocess.run(
+                arch_result = subprocess.run(  # nosec B603  # Safe: controlled python executable with known code
                     [
                         str(python_path),
                         "-c",
@@ -445,7 +446,7 @@ class VenvSetup:
         )
 
         try:
-            subprocess.run(
+            subprocess.run(  # nosec B603  # Safe: controlled python executable with venv module
                 [str(python_installation.executable), "-m", "venv", str(venv_path)],
                 check=True,
                 cwd=self.project_root,
@@ -490,7 +491,7 @@ class VenvSetup:
         self.print_colored("Checking pip version...", Colors.OKBLUE)
         try:
             # Check current pip version
-            pip_version_result = subprocess.run(
+            pip_version_result = subprocess.run(  # nosec B603 # Need pip version for dependency management
                 [str(python_exe), "-m", "pip", "--version"],
                 capture_output=True,
                 text=True,
@@ -501,7 +502,7 @@ class VenvSetup:
 
             # Try to upgrade pip
             self.print_colored("Upgrading pip if needed...", Colors.OKBLUE)
-            upgrade_result = subprocess.run(
+            upgrade_result = subprocess.run(  # nosec B603 # Standard pip upgrade command with trusted path
                 [str(python_exe), "-m", "pip", "install", "--upgrade", "pip"],
                 capture_output=True,
                 text=True,
@@ -556,7 +557,7 @@ class VenvSetup:
 
                 # Try to use Poetry if available
                 try:
-                    poetry_result = subprocess.run(
+                    poetry_result = subprocess.run(  # nosec B603 B607
                         ["poetry", "--version"],
                         capture_output=True,
                         text=True,
@@ -581,7 +582,7 @@ class VenvSetup:
                             install_cmd.extend(["--with", ",".join(groups)])
 
                         try:
-                            subprocess.run(
+                            subprocess.run(  # nosec B603 # Trusted poetry install command with validated args
                                 install_cmd, cwd=self.project_root, check=True
                             )
                             self.print_colored(
@@ -628,7 +629,9 @@ class VenvSetup:
                 install_cmd[-1] = f".[{','.join(extras)}]"
 
             try:
-                subprocess.run(install_cmd, cwd=self.project_root, check=True)
+                subprocess.run(
+                    install_cmd, cwd=self.project_root, check=True
+                )  # nosec B603 # Standard pip install with validated arguments
                 self.print_colored("Project installed successfully!", Colors.OKGREEN)
             except subprocess.CalledProcessError as e:
                 self.print_colored(f"Error installing project: {e}", Colors.FAIL)
@@ -666,7 +669,7 @@ class VenvSetup:
                 if req_path.exists():
                     self.print_colored(f"Installing from {req_file}...", Colors.OKBLUE)
                     try:
-                        subprocess.run(
+                        subprocess.run(  # nosec B603 # Standard pip install with requirements file
                             [
                                 str(python_exe),
                                 "-m",
@@ -691,7 +694,7 @@ class VenvSetup:
                 # Install some basic packages for testing
                 basic_packages = ["pytest", "pytest-cov", "black", "isort", "flake8"]
                 try:
-                    subprocess.run(
+                    subprocess.run(  # nosec B603 # Installing standard Python development packages
                         [str(python_exe), "-m", "pip", "install"] + basic_packages,
                         check=True,
                     )

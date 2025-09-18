@@ -14,7 +14,7 @@ graph TB
         E --> H[Documentation Build]
     end
 
-    subgraph "CI Pipeline (.github/workflows/ci.yml)"
+    subgraph "CI Pipeline ci.yml"
         E --> I[Setup Matrix]
         I --> J[Install Dependencies]
         J --> K[Run Linters]
@@ -22,7 +22,9 @@ graph TB
         L --> M[Generate Coverage]
         M --> N[Upload Artifacts]
     end
-    ### Performance Optimization
+```
+
+### Performance Optimization
 
 1. **Efficient Caching**: Strategic use of build caches
 2. **Resource Allocation**: Right-sized compute resources
@@ -42,7 +44,11 @@ Our CI/CD pipeline implementation provides a comprehensive framework for modern 
 - **Documentation**: Automated building and deployment to GitHub Pages
 - **Testing**: Comprehensive test coverage across multiple Python versions
 
-The combination of pre-commit hooks, GitHub Actions workflows, and development best practices creates a robust foundation for professional software development that ensures code quality, security, and maintainability throughout the development lifecycle.bgraph "Security Analysis (.github/workflows/security.yml)"
+The combination of pre-commit hooks, GitHub Actions workflows, and development best practices creates a robust foundation for professional software development that ensures code quality, security, and maintainability throughout the development lifecycle.
+
+```mermaid
+graph TB
+    subgraph "Security Analysis (.github/workflows/security.yml)"
         F --> O[CodeQL Analysis]
         F --> P[Dependency Review]
         F --> Q[Security Scan]
@@ -72,11 +78,13 @@ The combination of pre-commit hooks, GitHub Actions workflows, and development b
 The CI workflow is the backbone of our quality assurance process, running on every push and pull request to main/develop branches.
 
 #### Triggers
+
 - **Push**: To `main` and `develop` branches
 - **Pull Request**: Targeting `main` branch
 - **Manual**: Via `workflow_dispatch`
 
 #### Permissions
+
 - `contents: read` - Access repository content
 - `checks: write` - Update check status
 - `pull-requests: write` - Comment on PRs
@@ -116,11 +124,12 @@ flowchart TD
 
 #### Job 1: lint-and-security
 
-This job runs code quality and security checks using Python 3.8:
+This job runs code quality and security checks using Python 3.11:
 
 **Steps:**
+
 1. **Checkout code** - Shallow clone with `fetch-depth: 1`
-2. **Set up Python 3.8** - Base Python version for consistency
+2. **Set up Python 3.11** - Base Python version for consistency
 3. **Install Poetry** - Latest version with in-project venv
 4. **Cache dependencies** - Poetry cache keyed by `poetry.lock`
 5. **Install dev dependencies** - Only development dependencies needed
@@ -130,13 +139,15 @@ This job runs code quality and security checks using Python 3.8:
 
 #### Job 2: test
 
-This job runs comprehensive tests across multiple Python versions (3.8, 3.9, 3.10, 3.11):
+This job runs comprehensive tests across multiple Python versions (3.11, 3.12):
 
 **Matrix Strategy:**
+
 - `fail-fast: false` - Continue testing other versions if one fails
-- `python-version: ['3.8', '3.9', '3.10', '3.11']` - Multi-version compatibility
+- `python-version: ['3.11', '3.12']` - Multi-version compatibility
 
 **Steps:**
+
 1. **Checkout code** - Fresh shallow clone
 2. **Set up Python** - Matrix-specific Python version
 3. **Install Poetry** - Consistent tooling across versions
@@ -147,6 +158,7 @@ This job runs comprehensive tests across multiple Python versions (3.8, 3.9, 3.1
 8. **Upload test artifacts** - Results archived for 30 days
 
 **Coverage Configuration:**
+
 - Target: `src/python_cicd_demo` module
 - Reports: XML (Codecov), terminal (CI logs)
 - Failure tolerance: `fail_ci_if_error: false`
@@ -155,17 +167,19 @@ This job runs comprehensive tests across multiple Python versions (3.8, 3.9, 3.1
 
 Comprehensive security scanning workflow with multiple analysis types.
 
-#### Triggers
+#### Security Triggers
+
 - **Push**: To `main` and `develop` branches
 - **Pull Request**: Targeting `main` branch
 - **Schedule**: Weekly on Mondays at 6 AM UTC (`0 6 * * 1`)
 
-#### Permissions
+#### Security Permissions
+
 - `contents: read` - Repository access
 - `security-events: write` - SARIF upload to Security tab
 - `actions: read` - Workflow metadata access
 
-#### Jobs Structure
+#### Security Jobs Structure
 
 ```mermaid
 flowchart TD
@@ -649,7 +663,7 @@ flowchart TD
 4. **Monitoring**: Continuous monitoring of security advisories and CVEs
 5. **Response Plan**: Clear procedures for security incident response
 
-### Summary
+### Pipeline Summary
 
 Our CI/CD pipeline implementation provides a comprehensive framework for modern Python development with:
 
@@ -693,12 +707,13 @@ flowchart TD
 ```
 
 **Release Features:**
+
 - **Semantic Versioning**: Automatic version calculation based on commit messages
 - **Changelog Generation**: Automated release notes from conventional commits
 - **Docker Integration**: Containerized releases with security scanning
 - **Multi-stage Deployment**: Staged rollout with rollback capabilities
 
-### 4. Documentation (docs.yml)
+### Documentation Workflow Details
 
 Automated documentation building and deployment to GitHub Pages.
 
@@ -774,13 +789,13 @@ graph LR
     C[Pip Cache] --> D[~/.cache/pip]
     E[Pre-commit Cache] --> F[~/.cache/pre-commit]
     G[Node Cache] --> H[~/.npm]
-    I[Docker Layer Cache] --> J[/tmp/.buildx-cache]
+    I[Docker Layer Cache] --> J[~/tmp/.buildx-cache]
 
     subgraph "Cache Keys"
-        K[Poetry: hash(poetry.lock)]
-        L[Pip: hash(requirements.txt)]
-        M[Pre-commit: hash(.pre-commit-config.yaml)]
-        N[Node: hash(package-lock.json)]
+        K[Poetry: hash poetry.lock]
+        L[Pip: hash requirements.txt]
+        M[Pre-commit: hash .pre-commit-config.yaml]
+        N[Node: hash package-lock.json]
         O[Docker: date + branch]
     end
 ```
@@ -850,7 +865,7 @@ Pipeline status and metrics are integrated with:
 4. **Compliance**: Adherence to security standards and regulations
 5. **Regular Updates**: Keep all tools and dependencies current
 
-### Performance Optimization
+### Performance Best Practices
 
 1. **Efficient Caching**: Strategic use of build caches
 2. **Resource Allocation**: Right-sized compute resources

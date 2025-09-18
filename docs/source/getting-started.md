@@ -8,7 +8,7 @@ Before you begin working with this Python CI/CD Demo project, ensure you have th
 
 ```mermaid
 graph LR
-    A[Python 3.8+] --> B[Poetry]
+    A[Python 3.11+] --> B[Poetry]
     B --> C[Git]
     C --> D[VS Code]
     D --> E[Docker]
@@ -23,7 +23,7 @@ graph LR
 
 #### Core Requirements
 
-- **Python 3.8 or higher**: The project supports Python 3.8 through 3.12
+- **Python 3.11 or higher**: The project supports Python 3.11+
 - **Poetry**: Dependency management and virtual environment handling
 - **Git**: Version control (obviously!)
 - **VS Code**: Recommended IDE with excellent Python support
@@ -39,6 +39,7 @@ graph LR
 #### 1. Install Python
 
 **Windows (via Python.org):**
+
 ```powershell
 # Download from https://python.org/downloads/
 # Ensure "Add to PATH" is checked during installation
@@ -46,12 +47,14 @@ python --version
 ```
 
 **macOS (via Homebrew):**
+
 ```bash
 brew install python@3.12
 python3 --version
 ```
 
 **Linux (Ubuntu/Debian):**
+
 ```bash
 sudo apt update
 sudo apt install python3.12 python3.12-venv python3-pip
@@ -176,6 +179,7 @@ graph TB
 Here are the most common commands you'll use during development:
 
 #### Testing Commands
+
 ```bash
 # Run all tests
 make test
@@ -191,6 +195,7 @@ poetry run ptw
 ```
 
 #### Code Quality Commands
+
 ```bash
 # Format code
 make format
@@ -209,6 +214,7 @@ make quality
 ```
 
 #### Documentation Commands
+
 ```bash
 # Build documentation
 make docs
@@ -247,6 +253,7 @@ The project includes pre-configured tasks accessible via `Ctrl+Shift+P` → "Tas
 #### Debugging Configuration
 
 Launch configurations are provided for:
+
 - **Debug Current File**: Debug the currently open Python file
 - **Debug Tests**: Debug the test suite
 - **Debug Main Module**: Debug the main application
@@ -314,11 +321,13 @@ flowchart TD
 #### Step-by-Step Example
 
 1. **Create a new branch:**
+
    ```bash
    git checkout -b feature/add-multiply-function
    ```
 
 2. **Add a new function to `src/python_cicd_demo/main.py`:**
+
    ```python
    def multiply(a: float, b: float) -> float:
        """Multiply two numbers.
@@ -334,6 +343,7 @@ flowchart TD
    ```
 
 3. **Add tests in `tests/test_main.py`:**
+
    ```python
    def test_multiply():
        """Test multiply function."""
@@ -343,11 +353,13 @@ flowchart TD
    ```
 
 4. **Run tests locally:**
+
    ```bash
    poetry run pytest tests/test_main.py::test_multiply -v
    ```
 
 5. **Check code quality:**
+
    ```bash
    poetry run black src tests
    poetry run isort src tests
@@ -355,6 +367,7 @@ flowchart TD
    ```
 
 6. **Commit and push:**
+
    ```bash
    git add .
    git commit -m "feat: add multiply function with tests"
@@ -368,6 +381,7 @@ flowchart TD
 Our test suite provides comprehensive feedback:
 
 #### Coverage Reports
+
 ```bash
 # Generate HTML coverage report
 poetry run pytest --cov=src/python_cicd_demo --cov-report=html
@@ -391,6 +405,7 @@ start htmlcov/index.html  # Windows
 #### Poetry Issues
 
 **Problem**: `poetry install` fails with dependency conflicts
+
 ```bash
 # Solution: Clear cache and reinstall
 poetry cache clear --all pypi
@@ -399,6 +414,7 @@ poetry install
 ```
 
 **Problem**: Virtual environment not found
+
 ```bash
 # Solution: Recreate the environment
 poetry env remove python
@@ -408,6 +424,7 @@ poetry install
 #### Test Issues
 
 **Problem**: Tests fail with import errors
+
 ```bash
 # Solution: Ensure proper PYTHONPATH
 poetry run python -m pytest
@@ -416,6 +433,7 @@ poetry install
 ```
 
 **Problem**: Coverage reports missing files
+
 ```bash
 # Solution: Check source paths in pyproject.toml
 [tool.coverage.run]
@@ -425,6 +443,7 @@ source = ["src"]
 #### Git Issues
 
 **Problem**: Pre-commit hooks failing
+
 ```bash
 # Solution: Update hooks and run manually
 poetry run pre-commit autoupdate
@@ -432,6 +451,7 @@ poetry run pre-commit run --all-files
 ```
 
 **Problem**: Large files committed accidentally
+
 ```bash
 # Solution: Use git filter-branch or BFG
 git filter-branch --force --index-filter \

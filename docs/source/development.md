@@ -293,6 +293,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ```
 
 **Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -303,6 +304,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 - `chore`: Maintenance tasks
 
 **Examples:**
+
 ```bash
 git commit -m "feat: add user authentication system"
 git commit -m "fix(api): resolve timeout issue in user login"

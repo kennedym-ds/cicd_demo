@@ -378,7 +378,9 @@ Add any other context about the problem here.
 ## Error Output
 
 ```
+
 Paste full error messages and stack traces here
+
 ```
 
 ```

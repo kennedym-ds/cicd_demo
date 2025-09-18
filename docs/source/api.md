@@ -8,9 +8,9 @@ The `python_cicd_demo` package provides a collection of mathematical functions d
 graph TB
     subgraph "python_cicd_demo Package"
         A[main.py] --> B[Mathematical Functions]
-        B --> C[add()]
-        B --> D[subtract()]
-        B --> E[calculate()]
+        B --> C[add]
+        B --> D[subtract]
+        B --> E[calculate]
     end
 
     subgraph "Features"
@@ -380,16 +380,11 @@ result = calculate("add", 2, 3)
 ### Version History
 
 #### v1.0.0 (Current)
+
 - Initial release with core mathematical functions
 - Comprehensive type hints and documentation
 - Full test coverage
 - Security best practices
-
-#### Planned Features
-
-- **v1.1.0**: Advanced mathematical functions (power, square root)
-- **v1.2.0**: Vector operations and matrix support
-- **v2.0.0**: Async operations for large datasets
 
 ## Migration Guide
 
