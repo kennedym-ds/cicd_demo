@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="102" height="28" role="img" aria-label="COVERAGE: 64%">
+    <title>COVERAGE: 64%</title>
+    <g shape-rendering="crispEdges">
+        <rect width="73" height="28" fill="#555"/>
+        <rect x="73" width="29" height="28" fill="#4c1"/>
+    </g>
+    <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-weight="bold" font-size="100">
+        <text x="360" y="175" transform="scale(.1)" fill="#fff">COVERAGE</text>
+        <text x="830" y="175" transform="scale(.1)" fill="#fff">64%</text>
+    </g>
+</svg>

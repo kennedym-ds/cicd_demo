@@ -2,6 +2,80 @@
 
 This directory contains utility scripts for the Python CI/CD Demo project.
 
+## Coverage Badge Generator
+
+The coverage badge generator creates beautiful SVG badges from coverage.xml files, eliminating the need for external services like CodeCov.
+
+### Quick Start
+
+```bash
+# Generate a coverage badge (requires coverage.xml in project root)
+python scripts/generate_coverage_badge.py
+
+# Specify output location
+python scripts/generate_coverage_badge.py --output badges/coverage.svg
+
+# Generate different styles
+python scripts/generate_coverage_badge.py --style flat --output badges/coverage-flat.svg
+python scripts/generate_coverage_badge.py --style plastic --output badges/coverage-plastic.svg
+python scripts/generate_coverage_badge.py --style for-the-badge --output badges/coverage-large.svg
+```
+
+### Features
+
+- **Self-hosted**: No external dependencies or services required
+- **Multiple styles**: flat, plastic, for-the-badge
+- **Color-coded**: Red (<60%), yellow (60-79%), green (≥80%)
+- **Cross-platform**: Works on Windows, macOS, and Linux
+- **CI/CD ready**: Integrates seamlessly with GitHub Actions
+
+### Command Line Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--coverage-file` | Path to coverage.xml file | `coverage.xml` |
+| `--output` | Output SVG file path | `badges/coverage.svg` |
+| `--style` | Badge style (flat, plastic, for-the-badge) | `flat` |
+
+### Badge Styles
+
+#### Flat (Default)
+
+Clean, minimalist design suitable for most projects.
+
+#### Plastic
+
+Glossy appearance with subtle gradients.
+
+#### For-the-badge
+
+Bold, high-contrast design perfect for prominent display.
+
+### Color Coding
+
+The badge automatically changes color based on coverage percentage:
+
+- 🔴 **Red**: Coverage < 60% (needs improvement)
+- 🟡 **Yellow**: Coverage 60-79% (acceptable)
+- 🟢 **Green**: Coverage ≥ 80% (excellent)
+
+### CI/CD Integration
+
+The badge generator is integrated into the CI workflow and automatically:
+
+1. Runs after test execution
+2. Generates coverage badges in multiple styles
+3. Uploads badges as artifacts
+4. Publishes badges to the repository (main/develop branches)
+
+### Usage in Documentation
+
+Reference generated badges in your README:
+
+```markdown
+![Coverage](https://raw.githubusercontent.com/yourusername/yourrepo/main/badges/coverage.svg)
+```
+
 ## Virtual Environment Setup
 
 The virtual environment setup script helps you quickly set up a development environment for Python CI/CD Demo by:
@@ -75,7 +149,7 @@ python scripts/setup_venv.py --python C:\Python39\python.exe --dev
 .\scripts\setup_venv.ps1 -VenvName "testenv" -Force -Test
 ```
 
-## Features
+## Virtual Environment Features
 
 ### Intelligent Python Discovery
 

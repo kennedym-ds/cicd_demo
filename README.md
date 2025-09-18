@@ -7,7 +7,7 @@
 [![Release](https://github.com/username/python-cicd-demo/workflows/Release/badge.svg)](https://github.com/username/python-cicd-demo/actions)
 
 <!-- Code Quality -->
-[![codecov](https://codecov.io/gh/username/python-cicd-demo/branch/main/graph/badge.svg)](https://codecov.io/gh/username/python-cicd-demo)
+[![Coverage](https://raw.githubusercontent.com/username/python-cicd-demo/main/badges/coverage.svg)](https://github.com/username/python-cicd-demo/actions)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![Security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
@@ -198,6 +198,29 @@ python scripts/setup_venv.py --dev --all
 - **Dependency Management**: Supports pyproject.toml and requirements.txt files
 - **Optional Dependencies**: Install development, test, or all optional dependencies
 
+### Coverage Badge Generation
+
+The project includes a local coverage badge generator that creates SVG badges without requiring external services:
+
+```bash
+# Generate coverage badge from coverage.xml
+python scripts/generate_coverage_badge.py
+
+# Generate different styles
+python scripts/generate_coverage_badge.py --style plastic --output coverage-plastic.svg
+python scripts/generate_coverage_badge.py --style for-the-badge --output coverage-large.svg
+
+# Custom thresholds
+python scripts/generate_coverage_badge.py --min-good 85 --min-ok 70
+```
+
+**Features:**
+
+- **Multiple Styles**: Flat, plastic, and for-the-badge styles
+- **Color-Coded**: Green (good), yellow (ok), red (needs improvement)
+- **Customizable**: Adjustable thresholds and titles
+- **Self-Hosted**: No external dependencies or API tokens required
+
 ## 🔧 CI/CD Pipeline
 
 ### Workflows
@@ -206,7 +229,7 @@ python scripts/setup_venv.py --dev --all
    - Runs on every push and pull request
    - Linting and security scanning
    - Multi-version Python testing (3.11, 3.12)
-   - Code coverage reporting
+   - Local coverage badge generation and artifact storage
 
 2. **Security Analysis** (`.github/workflows/security.yml`):
    - CodeQL static analysis
@@ -224,9 +247,10 @@ python scripts/setup_venv.py --dev --all
 
 ### Environment Setup
 
-Create the following secrets in your GitHub repository:
+This project uses self-hosted coverage badge generation, so no external service tokens are required for basic functionality.
 
-- `CODECOV_TOKEN`: For code coverage reporting
+Optional secrets for enhanced features:
+
 - Additional secrets as needed for your specific deployment targets
 
 ## 🧪 Testing Strategy
