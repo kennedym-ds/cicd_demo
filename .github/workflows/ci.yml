@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 1
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -35,7 +35,7 @@ jobs:
           virtualenvs-in-project: true
 
       - name: Cache Poetry dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .venv
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
@@ -70,7 +70,7 @@ jobs:
           fetch-depth: 1
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -82,7 +82,7 @@ jobs:
           virtualenvs-in-project: true
 
       - name: Cache Poetry dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .venv
           key: ${{ runner.os }}-poetry-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
@@ -97,13 +97,13 @@ jobs:
         run: poetry run pytest --cov=src/python_cicd_demo --cov-report=xml --cov-report=term-missing
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
-          file: ./coverage.xml
+          files: ./coverage.xml
           fail_ci_if_error: false
 
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-results-${{ matrix.python-version }}
