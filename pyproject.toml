@@ -21,7 +21,7 @@ python-semantic-release = "^10.4.1"
 sphinx = "^8.2.3"
 sphinx-rtd-theme = "^3.0.2"
 myst-parser = "^4.0.1"
-pbr = "^7.0.1"
+pbr = "^7.0.3"
 sphinxcontrib-mermaid = "^1.0.0"
 
 [build-system]
