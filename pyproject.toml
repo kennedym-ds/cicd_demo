@@ -20,7 +20,7 @@ isort = "^6.0.1"
 python-semantic-release = "^10.4.1"
 sphinx = "^8.2.3"
 sphinx-rtd-theme = "^3.0.2"
-myst-parser = "^4.0.1"
+myst-parser = "^5.0.0"
 pbr = "^7.0.1"
 sphinxcontrib-mermaid = "^1.0.0"
 
